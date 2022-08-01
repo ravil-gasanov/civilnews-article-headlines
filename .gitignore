@@ -130,3 +130,6 @@ dmypy.json
 
 # ignore raw data
 /data/civilnews-raw.csv
+
+# ignore crawler.py that fetches article data
+/scrape/crawler.py
