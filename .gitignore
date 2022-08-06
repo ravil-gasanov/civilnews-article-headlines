@@ -131,5 +131,5 @@ dmypy.json
 # ignore raw data
 /data/civilnews-raw.csv
 
-# ignore crawler.py that fetches article data
+# ignore crawler.py that fetches full text
 /scrape/crawler.py
