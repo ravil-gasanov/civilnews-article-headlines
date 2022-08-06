@@ -92,7 +92,7 @@ class Word2Vec:
           ohe = self.__one_hot_encode(word_idx)
 
           _, embedding = self.model(ohe.to(device))
-          embedding = embedding.detach()
+          embedding = embedding.detach().squeeze().cpu().numpy()
           embeddings.append(embedding)
         
         return embeddings
