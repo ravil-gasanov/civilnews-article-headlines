@@ -1,4 +1,10 @@
 import pandas as pd
+import nltk
+import regex
+from nltk.corpus import stopwords
+
+nltk.download('stopwords')
+en_stop_words = stopwords.words('english')
 
 def clean(raw):
     # drop a garbage column 
@@ -17,4 +23,22 @@ def clean(raw):
     raw = raw.loc[pd.to_numeric(raw['views'], errors = 'coerce').dropna().index, :]
     raw['views'] = raw['views'].astype(float)
 
-    return raw.reset_index(drop = True)
+    # drop the first row with year = 1970
+    raw = raw.reset_index(drop = True)
+    raw = raw.loc[1:, :].reset_index(drop = True)
+
+    return raw
+
+def tokenize(headline):
+    headline = headline.lower()
+    words = regex.findall(r'\w+', headline)
+    clean_words = []
+  
+    # what is a more idiomatic / efficient way to do this?
+    for word in words:
+        if word not in en_stop_words:
+            clean_words.append(word)
+    
+    return clean_words
+
+
